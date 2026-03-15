@@ -19,10 +19,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Template Sync
         uses: AndreasAugustin/actions-template-sync@v2
         with:
           source_repo_path: ublue-os/image-template
           upstream_branch: main
+          source_gh_token: ${{ github.token }}
+          target_gh_token: ${{ secrets.TEMPLATE_SYNC_TOKEN }}
           pr_labels: template_sync
